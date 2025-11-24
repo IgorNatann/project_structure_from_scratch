@@ -42,7 +42,7 @@ def get_data():
 st.set_page_config(page_title='Dashboard do diretor', layout='wide')
 
 # Título do Dashboard
-st.title('Esse e um texto')
+st.title('Acompanhamento de Commodities')
 
 # Descrição
 st.write("""
