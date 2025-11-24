@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: dbsales_khd7
+    schema: public
+    tables:
+      - name: commodities
+        description: "Tabela que contem dados historicos de commodities"
+        columns:
+          - name: Date
+            description: "Data da observacao"
+          - name: Close
+            description: "Preco de fechamento da commodity"
+          - name: simbolo
+            description: "Simbolo da commodity"
