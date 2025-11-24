@@ -9,7 +9,7 @@ Este projeto utiliza DBT (Data Build Tool) para gerenciar e transformar dados de
 ## Estrutura do Projeto
 
 ```mermaid
-graph TD
+graph TD;
     A[Início] --> B[Extrair Dados das Commodities]
     B --> C[Transformar Dados das Commodities]
     C --> D[Carregar Dados no PostgreSQL]
