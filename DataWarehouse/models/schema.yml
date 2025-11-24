@@ -13,3 +13,15 @@ sources:
             description: "Preco de fechamento da commodity"
           - name: simbolo
             description: "Simbolo da commodity"
+
+  - name: stg_movimentacao_commodities
+    description: "Tabela de staging para dados de movimentação de commodities"
+    columns:
+      - name: data
+        description: "Data da transação no formato AAAA-MM-DD"
+      - name: simbolo
+        description: "Símbolo da commodity"
+      - name: acao
+        description: "Tipo de transação (buy/sell)"
+      - name: quantidade
+        description: "Quantidade transacionada"

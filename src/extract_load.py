@@ -1,7 +1,6 @@
 # Import Bibliotecas
 import os
 from urllib.parse import urlparse
-
 import pandas as pd
 import yfinance as yf
 from dotenv import load_dotenv
@@ -12,7 +11,6 @@ from sqlalchemy.engine import URL
 load_dotenv()
 
 DB_SCHEMA = os.getenv('DB_SCHEMA_PROD', 'public')
-
 
 def construir_database_url():
     """Monta a URL do banco suportando hosts completos ou apenas hostname."""
@@ -49,7 +47,6 @@ def construir_database_url():
         database=db_name,
     )
 
-
 ENGINE = create_engine(construir_database_url())
 
 # Import das Variaveis de Ambiente
@@ -59,13 +56,11 @@ commodities = [
     'CL=F',  # Petroleo
 ]
 
-
 def buscar_dados_commodities(simbolo, periodo='5d', intervalo='1d'):
     ticker = yf.Ticker(simbolo)
     dados = ticker.history(period=periodo, interval=intervalo)[['Close']]
     dados['simbolo'] = simbolo
     return dados
-
 
 def buscar_todos_dados_commodities(lista_commodities):
     todos_dados = []
@@ -74,12 +69,11 @@ def buscar_todos_dados_commodities(lista_commodities):
         todos_dados.append(dados)
     return pd.concat(todos_dados)
 
-
 def salvar_dados_no_postgres(df, schema=None):
     destino_schema = schema or DB_SCHEMA
     df.to_sql('commodities', ENGINE, if_exists='replace', index=True, index_label='Data', schema=destino_schema)
 
-
 if __name__ == "__main__":
     dados_concatenados = buscar_todos_dados_commodities(commodities)
     salvar_dados_no_postgres(dados_concatenados)
+    print(f"Os dados foram importados e salvos no banco de dados. {dados_concatenados.head()}")
